@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <div class="page-container">
+        <h2 class="page-title">All Dogs</h2>
+        <% dogs.forEach(dog => { %>
+            <div class="quote-wrapper">
+                <blockquote>
+                    <%= dog.breed %> –
+                        <%= dog.name %>
+                </blockquote>
+                <div class="quote-actions">
+                    <a href="/dogs/<%= dog.id %>">Link</a>
+                </div>
+            </div>
+            <% }) %>
+    </div>
+</body>
+
+</html>
