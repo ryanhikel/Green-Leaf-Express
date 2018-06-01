@@ -1,29 +1,26 @@
-\c
-dogstagram
-
-DELETE FROM dogs;
-
-INSERT INTO dogs
-    (breed, name)
+\c plants_db;
+DELETE FROM plants;
+DELETE FROM regions;
+DELETE FROM plant_region;
+INSERT INTO regions
+    (region_name)
 VALUES
-    (
-        'australian shepherd',
-        'cammie'
-);
-
-INSERT INTO dogs
-    (breed, name)
+    ('North America'),
+    ('Central America'),
+    ('Europe'),
+    ('Mexico'),
+    ('Asia');
+INSERT INTO plants
+    (plant_name, species, tree_img_url, leaf_img_url)
 VALUES
-    (
-        'brown lab',
-        'riley'
-);
+    ('Apricot', 'Prunus armeniaca', 'https://c8.alamy.com/comp/EBT1BK/apricot-tree-prunus-armeniaca-goldrich-prunus-armeniaca-goldrich-cultivar-EBT1BK.jpg', 'https://www.pfaf.org/Admin/PlantImages/PrunusArmeniaca2.jpg'),
+    ( 'Black Cherry', 'Prunus serotina', 'https://cdn.shopify.com/s/files/1/1008/4432/products/Black_Cherry_2.jpg?v=1525019082', 'https://plants.ces.ncsu.edu/media/images/Prunus-serotina--Leigh-Anne-McConnaughey--CC-BY-SA.jpg');
 
-
-INSERT INTO dogs
-    (breed, name)
+INSERT INTO plant_region
+(plant_id, region_id)
 VALUES
-    (
-        'poodle',
-        'milo'
-);
+(1, 5),
+(2, 1),
+(2, 2),
+(2, 4)
+;
