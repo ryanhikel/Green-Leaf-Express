@@ -26,7 +26,7 @@ app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
 app.get("/", (request, response) => {
-    response.render("homepage");
+    response.render("landing");
 });
 
 app.get("/dogs", (request, response) => {
