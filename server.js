@@ -43,13 +43,25 @@ app.get("/regions", (request, response) => {
 });
 //find  a way to select the region name that is clicked
 //then pass that into Region.allRegionPlants
-app.get("/region-plants", (request, response) => {
-    Region.all().then(regions => {
-        Region.allRegionPlants(regions[1].region_name).then(plants => {
-            response.render("regions/plants", { plants: plants });
-        });
+app.get("/region/:name", (request, response) => {
+    const name = request.params.name;
+    console.log(name);
+
+    Region.allRegionPlants(name).then(plants => {
+        response.render("regions/plants", { plants: plants });
     });
 });
+app.get("/categories/:id", (request, response) => {
+    const category_id = request.params.id;
+    Promise.all([
+        Quote.allInCategory(category_id),
+        Category.find(category_id)
+    ]).then(([quotes, category]) => {
+        response.render("categories/show", { quotes: quotes, category: category });
+    });
+});
+
+
 app.get("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
     Plant.findById(id).then(plant => {

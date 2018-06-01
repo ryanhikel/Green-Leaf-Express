@@ -10,7 +10,7 @@
         <h2 class="page-title"><%=plants[0].region_name%></h2>
         <% plants.forEach(plant => { %>
             <h3>
-                <a href="/plant/<%=plant.plant_id%>"><%=plant.plant_name%></a>
+                <a href="/plants/<%=plant.plant_id%>"><%=plant.plant_name%></a>
                     (<%=plant.species%>)
             </h3>
             <img src="<%=plant.tree_img_url%>" height="300px" width="300px">

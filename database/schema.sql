@@ -1,6 +1,7 @@
 -- DROP DATABASE plants_db;
 -- CREATE DATABASE plants_db;
 -- \c plants_db
+DROP TABLE IF EXISTS plant_region;
 DROP TABLE IF EXISTS plants;
 DROP TABLE IF EXISTS regions;
 CREATE TABLE regions
