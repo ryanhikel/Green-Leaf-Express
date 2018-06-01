@@ -7,24 +7,20 @@
 
 <body>
     <div class="page-container">
-        <%if(plants){%>
-            <h2 class="page-title">
-                <%=plants[0].region_name%>
-            </h2>
-            <% plants.forEach(plant => { %>
-                <h3>
-                    <a href="/plants/<%=plant.plant_id%>">
-                        <%=plant.plant_name%>
-                    </a>
-                    (
-                    <%=plant.species%>)
-                </h3>
-                <img src="<%=plant.tree_img_url%>" height="300px" width="300px">
-                <img src="<%=plant.leaf_img_url%>" height="300px" width="300px">
-                <% }) %>
-                    <%}else{%>
-                        <h1>No plants from <%=plants[0].region_name%></h1>
-                        <%}%>
+        <h2 class="page-title">
+            <%=plants[0].region_name%>
+        </h2>
+        <% plants.forEach(plant => { %>
+            <h3>
+                <a href="/plants/<%=plant.plant_id%>">
+                    <%=plant.plant_name%>
+                </a>
+                (
+                <%=plant.species%>)
+            </h3>
+            <img src="<%=plant.tree_img_url%>" height="300px" width="300px">
+            <img src="<%=plant.leaf_img_url%>" height="300px" width="300px">
+            <%})%>
     </div>
 </body>
 

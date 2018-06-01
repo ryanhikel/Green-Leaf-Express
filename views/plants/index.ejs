@@ -6,7 +6,22 @@
 </head>
 
 <body>
-    <div class="page-container">
+<form action="/plants" method="POST">
+<input type="text" name="plant_name" placeholder="Plant Name">
+<input type="text" name="species" placeholder="Species">
+<input type="text" name="tree_img_url" placeholder="Tree Url">
+<input type="text" name="leaf_img_url" placeholder="Leaf Url">
+<label for="region_id">Native Region</label>
+<select name="region_id">
+<option value="1">North America</option>
+<option value="2">Central America</option>
+<option value="3">Europe</option>
+<option value="4">Mexico</option>
+<option value="5">Asia</option>
+</select>
+<input type="submit">
+</form>
+        
         <h2 class="page-title">All Plants</h2>
         <% plants.forEach(plant => { %>
             <h3>
@@ -17,7 +32,7 @@
             <img src="<%=plant.tree_img_url%>" height="300px" width="300px">
             <img src="<%=plant.leaf_img_url%>" height="300px" width="300px">
             <% }) %>
-    </div>
+
 </body>
 
 </html>

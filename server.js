@@ -2,6 +2,7 @@ const express = require("express");
 const path = require("path");
 const Plant = require("./models/Plant");
 const Region = require("./models/Region");
+const Plant_region = require("./models/Plant_region");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
@@ -35,9 +36,21 @@ app.get("/plants", (request, response) => {
         response.render("plants/index", { plants: plants });
     });
 });
+app.post("/plants", (request, response) => {
+    const newPlant = request.body;
+    newPlant.region_id = Number(newPlant.region_id);
+    Plant.create(newPlant)
+        .then(plant => {
+            newPlant.plant_id = plant.plant_id;
+            Plant_region.addRegion(newPlant)
+                .then(
+                    response.redirect(302, "/plants")
+                );
+        });
+});
+
 app.get("/regions", (request, response) => {
     Region.all().then(regions => {
-        console.log(regions[0].region_name);
         response.render("regions/regions", { regions: regions });
     });
 });
@@ -45,29 +58,30 @@ app.get("/regions", (request, response) => {
 //then pass that into Region.allRegionPlants
 app.get("/region/:name", (request, response) => {
     const name = request.params.name;
-    console.log(name);
-
     Region.allRegionPlants(name).then(plants => {
         response.render("regions/plants", { plants: plants });
     });
 });
-app.get("/categories/:id", (request, response) => {
-    const category_id = request.params.id;
-    Promise.all([
-        Quote.allInCategory(category_id),
-        Category.find(category_id)
-    ]).then(([quotes, category]) => {
-        response.render("categories/show", { quotes: quotes, category: category });
-    });
-});
-
-
 app.get("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
     Plant.findById(id).then(plant => {
         response.render("plants/show", { plant: plant[0] });
     });
 });
+//fix delete in show.ejs
+app.delete("/plants/:id", (request, response) => {
+    const id = Number(request.params.id);
+    console.log(id);
+    
+    Plant.delete(id).then(plant => {
+        console.log(plant[0].plant_id);
+        Plant_region.delete(id).then(
+            response.redirect(302, "/plants"));
+    });
+});
+
+
+
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });
