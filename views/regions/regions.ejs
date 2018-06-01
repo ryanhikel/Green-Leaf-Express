@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+
+<head>
+    <% include ../partials/head %>
+</head>
+
+<body>
+    <div class="page-container">
+        <h2 class="page-title">All Regions</h2>
+        <% regions.forEach(region => { %>
+       <h3>View plants from <a href="/region-plants"><%=region.region_name%></a></h3>
+            <% }) %>
+    </div>
+</body>
+
+</html>

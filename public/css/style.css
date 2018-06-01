@@ -5,18 +5,41 @@ body{
     min-height:100%; 
     padding:0; 
     margin:0; 
-    position:relative; 
+    position:relative;
+    color: white;
+    background-color: black;
+    text-align: center; 
 }
-
+h1.selection{
+    margin-top: 60px;
+}
+button{
+    background: transparent;
+    font-size: 40px;
+}
 body::after{ 
     display:block; 
     height:100px; 
 }
+header{
+    margin-top: 30px;
+    text-align: center;
 
+}
 footer{ 
   position:absolute; 
   bottom:0; 
   width:100%; 
   height:100px;
   text-align: center;
+  background-color: white;
+  color: black;
+}
+
+@media only screen and (min-width : 500px) {
+body{
+    background-image: url('/public/images/tree_landing.jpg');
+    color: black;
+}
+
 }

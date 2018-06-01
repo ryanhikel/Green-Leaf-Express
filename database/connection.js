@@ -19,10 +19,19 @@ monitor.attach(initOptions, ["query", "error"]);
 // Import pg-promise and initialize the library with an empty object.
 const pgp = require("pg-promise")(initOptions);
 
-// Prepare the connection URL from the format: 'postgres://username:password@host:port/database';
-const connectionURL = "postgres://localhost:5432/plants_db";
+const databaseName = "some_db";
 
-// Creating a new database connection with the provided URL.
-const db = pgp(connectionURL);
+let connectionConfig;
+
+if (process.env.NODE_ENV === "development" || !process.env.NODE_ENV) {
+    // Prepare the connection URL from the format: 'postgres://username:password@host:port/database';
+    connectionConfig = `postgres://localhost:5432/${plants_db}`;
+} else if (process.env.NODE_ENV === "production") {
+    // Heroku will set this variable for you.
+    connectionConfig = process.env.DATABASE_URL;
+}
+
+// Creating a new database connection with the provided configuration.
+const db = pgp(connectionConfig);
 
 module.exports = db;

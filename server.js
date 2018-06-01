@@ -1,6 +1,7 @@
 const express = require("express");
 const path = require("path");
-const Dog = require("./models/dog");
+const Plant = require("./models/Plant");
+const Region = require("./models/Region");
 const bodyParser = require("body-parser");
 const methodOverride = require("method-override");
 
@@ -29,12 +30,32 @@ app.get("/", (request, response) => {
     response.render("landing");
 });
 
-app.get("/dogs", (request, response) => {
-    Dog.all().then(dogs => {
-        response.render("dogs/index", { dogs: dogs });
+app.get("/plants", (request, response) => {
+    Plant.all().then(plants => {
+        response.render("plants/index", { plants: plants });
     });
 });
-
+app.get("/regions", (request, response) => {
+    Region.all().then(regions => {
+        console.log(regions[0].region_name);
+        response.render("regions/regions", { regions: regions });
+    });
+});
+//find  a way to select the region name that is clicked
+//then pass that into Region.allRegionPlants
+app.get("/region-plants", (request, response) => {
+    Region.all().then(regions => {
+        Region.allRegionPlants(regions[1].region_name).then(plants => {
+            response.render("regions/plants", { plants: plants });
+        });
+    });
+});
+app.get("/plants/:id", (request, response) => {
+    const id = Number(request.params.id);
+    Plant.findById(id).then(plant => {
+        response.render("plants/show", { plant: plant[0] });
+    });
+});
 app.listen(PORT, () => {
     console.log(`App listening on port ${PORT}`);
 });
