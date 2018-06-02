@@ -71,12 +71,22 @@ app.get("/plants/:id", (request, response) => {
 //fix delete in show.ejs
 app.delete("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
-    console.log(id);
-    
+    Plant_region.delete(id);
     Plant.delete(id).then(plant => {
-        console.log(plant[0].plant_id);
-        Plant_region.delete(id).then(
-            response.redirect(302, "/plants"));
+        response.redirect(302, "/plants");
+    });
+});
+app.put("/plants/:id", (request, response) => {
+    const update = request.body;
+    update.plant_id = Number(request.params.id);
+    update.region_id = Number(update.region_id);
+    console.log(update);
+    
+
+    
+    Plant_region.update(update);
+    Plant.update(update).then(plant => {
+        response.redirect(302, "/plants");
     });
 });
 

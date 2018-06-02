@@ -6,8 +6,11 @@ Plant_region.addRegion = plantRegion => {
     return db.one('INSERT INTO plant_region(plant_id, region_id) VALUES (${plant_id}, ${region_id}) RETURNING *', plantRegion);
 };
 Plant_region.delete = id => {
-    return db.result("DELETE FROM plant_region WHERE plant_id = ${id}", id);
-}
+    return db.result("DELETE FROM plant_region WHERE plant_id = ${id}", {id: id});
+};
+Plant_region.update = newData => {
+    return db.none('UPDATE plant_region SET region_id = ${region_id} WHERE plant_id = ${plant_id}', newData);
+};
 // find plants by region
 // SELECT name FROM plants NATURAL JOIN plant_region NATURAL JOIN regions
 // WHERE region_name = 'Asia';
