@@ -68,7 +68,6 @@ app.get("/plants/:id", (request, response) => {
         response.render("plants/show", { plant: plant[0] });
     });
 });
-//fix delete in show.ejs
 app.delete("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
     Plant_region.delete(id);
@@ -80,10 +79,6 @@ app.put("/plants/:id", (request, response) => {
     const update = request.body;
     update.plant_id = Number(request.params.id);
     update.region_id = Number(update.region_id);
-    console.log(update);
-    
-
-    
     Plant_region.update(update);
     Plant.update(update).then(plant => {
         response.redirect(302, "/plants");

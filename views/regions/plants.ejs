@@ -2,10 +2,26 @@
 <html>
 
 <head>
-    <% include ../partials/head %>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Green Leaf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
-
 <body>
+    <header>
+        <ul>
+            <li>
+                <a href="/">Green Leaf</a>
+            </li>
+            <li>
+                <a href="/plants">All Plants</a>
+            </li>
+            <li>
+                <a class="active" href="/regions">Regions</a>
+            </li>
+        </ul>
+    </header>
     <div class="page-container">
         <h2 class="page-title">
             <%=plants[0].region_name%>

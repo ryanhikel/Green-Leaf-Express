@@ -2,12 +2,31 @@
 <html>
 
 <head>
-    <% include ../partials/head %>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Green Leaf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>
+    <header>
+        <ul>
+            <li>
+                <a class="active" href="/">Green Leaf</a>
+            </li>
+            <li>
+                <a href="/plants">All Plants</a>
+            </li>
+            <li>
+                <a href="/regions">Regions</a>
+            </li>
+        </ul>
+    </header>
     <div>
-        <h2><%=plant.plant_name%> (<%=plant.species%>)</h2>
+        <h2>
+            <%=plant.plant_name%> (
+                <%=plant.species%>)</h2>
         <img src="<%=plant.tree_img_url%>" height="300px" width="300px">
         <img src="<%=plant.leaf_img_url%>" height="300px" width="300px">
         <form method="POST" action="/plants/<%=plant.plant_id%>?_method=PUT">
@@ -24,7 +43,7 @@
                 <option value="5">Asia</option>
             </select>
             <input type="submit">
-            </form>
+        </form>
         <form method="POST" action="/plants/<%=plant.plant_id%>?_method=DELETE">
             <button type="submit">Delete</button>
         </form>

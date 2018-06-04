@@ -2,16 +2,33 @@
 <html>
 
 <head>
-    <% include ../partials/head %>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Green Leaf</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
 <body>
+    <header>
+        <ul>
+            <li>
+                <a  href="/">Green Leaf</a>
+            </li>
+            <li>
+                <a class="active" href="/plants">All Plants</a>
+            </li>
+            <li>
+                <a href="/regions">Regions</a>
+            </li>
+        </ul>
+    </header>
     <h2>Add a new tree</h2>
 <form action="/plants" method="POST">
 <input type="text" name="plant_name" placeholder="Plant Name">
 <input type="text" name="species" placeholder="Species">
-<input type="text" name="tree_img_url" placeholder="Tree Url">
-<input type="text" name="leaf_img_url" placeholder="Leaf Url">
+<input type="text" name="tree_img_url" placeholder="Plant Url">
+<input type="text" name="leaf_img_url" placeholder="Plant Leaf Url">
 <label for="region_id">Native Region</label>
 <select name="region_id">
 <option value="1">North America</option>

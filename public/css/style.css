@@ -3,43 +3,94 @@ html{
 }
 body{ 
     min-height:100%; 
-    padding:0; 
+    padding: 0; 
     margin:0; 
     position:relative;
-    color: white;
-    background-color: black;
+    color: black;
+    background-color: white;
     text-align: center; 
+}
+div{
+    padding-top: 40px;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
 }
 h1.selection{
     margin-top: 60px;
 }
 button{
     background: transparent;
+    border: none;
     font-size: 40px;
 }
-body::after{ 
+button:hover{
+    background-color: steelblue;
+}
+/* body::after{ 
     display:block; 
     height:100px; 
-}
+} */
 header{
-    margin-top: 30px;
+    position:fixed; 
+    width:100%; 
+    height:60px;
     text-align: center;
-
+    color: white;
+    top: 0;
 }
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: black;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: steelblue;
+}
+
+.active{
+    background-color: rgb(30, 119, 192);
+}
+
 footer{ 
   position:absolute; 
   bottom:0; 
   width:100%; 
-  height:100px;
+  height:70px;
   text-align: center;
-  background-color: white;
-  color: black;
+  background-color: black;
+  color: white;
+}
+footer h1{
+    margin: 0;
 }
 
 @media only screen and (min-width : 500px) {
 body{
-    background-image: url('/public/images/tree_landing.jpg');
-    color: black;
+    background-image: url('/public/images/black_tree_backgound.jpg');
+    background-size: cover;
+    background-position: bottom
+}
+div{
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    margin-left: 30px; 
 }
 
 }

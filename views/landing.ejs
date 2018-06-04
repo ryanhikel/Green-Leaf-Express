@@ -9,20 +9,39 @@
     <link rel="stylesheet" href="/public/css/style.css">
 </head>
 
-<header>
-    <h1>Green Leaf</h1>
-</header>
 
 <body>
 
-    <h1 class="selection">All Plants</h1>
-    <button onclick="window.location.href='/plants'">🌲</button>
-    <h1 class="selection">View Regions</h1>
-    <button onclick="window.location.href='/regions'">🌎</button>
+
+        <header>
+            <ul>
+                <li>
+                    <a class="active" href="/">Green Leaf</a>
+                </li>
+                <li>
+                    <a href="/plants">All Plants</a>
+                </li>
+                <li>
+                    <a href="/regions">Regions</a>
+                </li>
+            </ul>
+        </header>
+        
+        
+        <div>
+            <h1>View Plants</h1>
+            <button onclick="window.location.href='/plants'">
+                <img src="/public/images/tree_silhouette.png" height="60px">
+            </button>
+            <h1 class="selection">View Regions</h1>
+            <button onclick="window.location.href='/regions'">
+                <img src="/public/images/globe_icon.png" height="50px">
+            </button>
+        </div>
+        <footer>
+            <h1>Footer</h1>
+        </footer>
 
 </body>
-<footer>
-    <h1>Footer</h1>
-</footer>
 
 </html>
