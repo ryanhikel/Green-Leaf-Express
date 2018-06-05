@@ -32,29 +32,33 @@ app.get("/", (request, response) => {
 });
 
 app.get("/plants", (request, response) => {
-    Region.all().then(regions => {
-        Plant.all().then(plants => {
-            response.render("plants/index", { plants: plants, regions: regions });
-        });
+    Promise.all([
+        Region.all(),
+        Plant.all()
+    ]).then(([regions, plants]) => {
+        response.render("plants/index", { plants: plants, regions: regions });
     });
 });
 app.post("/plants", (request, response) => {
-    const newItem = request.body;
-    if (!newItem.region_id) {
-        Region.create(newItem).then(
-            response.redirect(302, "/plants")
-        );
-    }else{
-    newItem.region_id = Number(newItem.region_id);
-    Plant.create(newItem)
-        .then(plant => {
-            newItem.plant_id = plant.plant_id;
-            Plant_region.addRegion(newItem)
-                .then(
-                    response.redirect(302, "/plants")
-                );
-        });
-    }
+    const newPlant = request.body;
+        newPlant.region_id = Number(newPlant.region_id);
+        //a region was selected so we are created 
+        Plant.create(newPlant)
+            .then(plant => {
+                newPlant.plant_id = plant.plant_id;
+                Plant_region.addRegion(newPlant)
+                    .then(
+                        response.redirect(302, "/plants")
+                    );
+            });
+    // }
+});
+
+app.post("/regions", (request, response) =>{
+    const newRegion = request.body;
+    Region.create(newRegion).then(
+        response.redirect(302, "/plants")
+    );
 });
 
 app.get("/regions", (request, response) => {
@@ -68,9 +72,10 @@ app.get("/region/:name", (request, response) => {
     const name = request.params.name;
     Region.allRegionPlants(name).then(plants => {
         if (!plants[0]) {
+            //Replace with a random gif based on region name
             response.send('No plants in this region');
-        }else{
-        response.render("regions/plants", { plants: plants });
+        } else {
+            response.render("regions/plants", { plants: plants });
         }
     });
 });
@@ -82,15 +87,19 @@ app.get("/plants/:id", (request, response) => {
             response.render("plants/show", { plant: plant[0], regions: regions });
         });
     });
-    
+
 });
 
 app.delete("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
-    Plant_region.delete(id);
-    Plant.delete(id).then(plant => {
-        response.redirect(302, "/plants");
-    });
+    Promise.all([
+        Plant_region.delete(id),
+    Plant.delete(id)
+    ]).then(response.redirect(302, "/plants"));
+    // Plant_region.delete(id);
+    // Plant.delete(id).then(plant => {
+    //     response.redirect(302, "/plants");
+    // });
 });
 app.put("/plants/:id", (request, response) => {
     const update = request.body;
