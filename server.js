@@ -40,10 +40,7 @@ app.get("/plants", (request, response) => {
 });
 app.post("/plants", (request, response) => {
     const newItem = request.body;
-    console.log(newItem);
-    
     if (!newItem.region_id) {
-
         Region.create(newItem).then(
             response.redirect(302, "/plants")
         );
@@ -70,7 +67,6 @@ app.get("/regions", (request, response) => {
 app.get("/region/:name", (request, response) => {
     const name = request.params.name;
     Region.allRegionPlants(name).then(plants => {
-        console.log(plants);
         if (!plants[0]) {
             response.send('No plants in this region');
         }else{
@@ -81,9 +77,12 @@ app.get("/region/:name", (request, response) => {
 
 app.get("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
-    Plant.findById(id).then(plant => {
-        response.render("plants/show", { plant: plant[0] });
+    Region.all().then(regions => {
+        Plant.findById(id).then(plant => {
+            response.render("plants/show", { plant: plant[0], regions: regions });
+        });
     });
+    
 });
 
 app.delete("/plants/:id", (request, response) => {

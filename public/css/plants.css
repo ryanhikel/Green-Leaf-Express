@@ -12,7 +12,7 @@ body{
     font-family: 'Sunflower', sans-serif;
 }
 div{
-    padding: 50px 0;
+    padding: 40px 0;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -20,9 +20,28 @@ div{
 h1.selection{
     margin-top: 60px;
 }
-button {
-    background-color: rgb(245, 11, 11); /* Green */
+
+.edit {
+    background-color: rgb(4, 49, 247);
     border: none;
+    border-radius: 20px;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 3px 0;
+}
+
+.edit:hover{
+    background-color: rgb(21, 5, 160);
+}
+
+.delete {
+    background-color: rgb(245, 11, 11);
+    border: none;
+    border-radius: 20px;
     color: white;
     padding: 10px 20px;
     text-align: center;
@@ -30,8 +49,8 @@ button {
     display: inline-block;
     font-size: 16px;
 }
-button:hover{
-    background-color: steelblue;
+.delete:hover{
+    background-color: rgb(175, 8, 8);
 }
 header{
     position:fixed; 
@@ -74,13 +93,50 @@ footer{
   position:absolute; 
   bottom:0; 
   width:100%; 
-  height:70px;
+  height:80px;
   text-align: center;
   background-color: black;
   color: white;
 }
-footer h1{
-    margin: 0;
+
+.fa {
+    margin-top: 10px;
+    padding: 20px;
+    font-size: 20px;
+    width: 20px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 50%;
+}
+
+.fa-instagram {
+    background: #125688;
+    color: white;
+}
+
+.fa-instagram:hover {
+    background: white;
+    color:#125688;
+}
+
+.fa-github {
+    background: white;
+    color: black;
+}
+
+.fa-github:hover {
+    background: blueviolet;
+    color: white;
+}
+
+.fa-linkedin {
+  background: #007bb5;  
+  color: white;
+}  
+
+.fa-linkedin:hover {
+  background: white;
+  color: #007bb5;
 }
 
 @media only screen and (min-width : 500px) {
@@ -91,5 +147,4 @@ div{
     align-items: center;
     margin-left: 30px; 
 }
-
 }

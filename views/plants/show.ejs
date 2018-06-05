@@ -13,17 +13,17 @@
             <br>
             <label for="region_id">Native Region</label>
             <select name="region_id">
-                <option value="1">North America</option>
-                <option value="2">Central America</option>
-                <option value="3">Europe</option>
-                <option value="4">Mexico</option>
-                <option value="5">Asia</option>
+                <% regions.forEach(region => { %>
+                    <option value="<%=region.region_id%>">
+                        <%=region.region_name%>
+                    </option>
+                    <% }) %>
             </select>
             <br>
-            <input type="submit">
+            <button class="edit" type="submit">Edit</button>
         </form>
         <form method="POST" action="/plants/<%=plant.plant_id%>?_method=DELETE">
-            <button type="submit">Delete</button>
+            <button class="delete" type="submit">Delete</button>
         </form>
     </div>
     <% include ../partials/footer %>
