@@ -1,39 +1,16 @@
-<!doctype html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Green Leaf</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/public/css/style.css">
-</head>
-
-<body>
-    <header>
-        <ul>
-            <li>
-                <a class="active" href="/">Green Leaf</a>
-            </li>
-            <li>
-                <a href="/plants">All Plants</a>
-            </li>
-            <li>
-                <a href="/regions">Regions</a>
-            </li>
-        </ul>
-    </header>
+<% include ../partials/other_head %>
     <div>
         <h2>
             <%=plant.plant_name%> (
                 <%=plant.species%>)</h2>
-        <img src="<%=plant.tree_img_url%>" height="300px" width="300px">
-        <img src="<%=plant.leaf_img_url%>" height="300px" width="300px">
+        <img src="<%=plant.tree_img_url%>" height="200px" width="200px">
+        <img src="<%=plant.leaf_img_url%>" height="200px" width="200px">
         <form method="POST" action="/plants/<%=plant.plant_id%>?_method=PUT">
-            <input type="text" name="plant_name" placeholder="Plant Name">
-            <input type="text" name="species" placeholder="Species">
-            <input type="text" name="tree_img_url" placeholder="Tree Url">
-            <input type="text" name="leaf_img_url" placeholder="Leaf Url">
+            <input type="text" required name="plant_name" placeholder="Plant Name">
+            <input type="text" required name="species" placeholder="Species">
+            <input type="text" required name="tree_img_url" placeholder="Plant Url">
+            <input type="text" required name="leaf_img_url" placeholder="Leaf Url">
+            <br>
             <label for="region_id">Native Region</label>
             <select name="region_id">
                 <option value="1">North America</option>
@@ -42,12 +19,11 @@
                 <option value="4">Mexico</option>
                 <option value="5">Asia</option>
             </select>
+            <br>
             <input type="submit">
         </form>
         <form method="POST" action="/plants/<%=plant.plant_id%>?_method=DELETE">
             <button type="submit">Delete</button>
         </form>
     </div>
-</body>
-
-</html>
+    <% include ../partials/footer %>

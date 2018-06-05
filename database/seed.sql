@@ -1,4 +1,4 @@
-\c plants_db;
+-- \c plants_db;
 DELETE FROM plants;
 DELETE FROM regions;
 DELETE FROM plant_region;

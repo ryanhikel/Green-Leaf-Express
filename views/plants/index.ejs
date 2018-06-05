@@ -1,56 +1,41 @@
-<!doctype html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Green Leaf</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/public/css/style.css">
-</head>
-
-<body>
-    <header>
-        <ul>
-            <li>
-                <a  href="/">Green Leaf</a>
-            </li>
-            <li>
-                <a class="active" href="/plants">All Plants</a>
-            </li>
-            <li>
-                <a href="/regions">Regions</a>
-            </li>
-        </ul>
-    </header>
-    <h2>Add a new tree</h2>
-<form action="/plants" method="POST">
-<input type="text" name="plant_name" placeholder="Plant Name">
-<input type="text" name="species" placeholder="Species">
-<input type="text" name="tree_img_url" placeholder="Plant Url">
-<input type="text" name="leaf_img_url" placeholder="Plant Leaf Url">
-<label for="region_id">Native Region</label>
-<select name="region_id">
-<option value="1">North America</option>
-<option value="2">Central America</option>
-<option value="3">Europe</option>
-<option value="4">Mexico</option>
-<option value="5">Asia</option>
-</select>
-<input type="submit">
-</form>
-        
-        <h2 class="page-title">All Plants</h2>
+<% include ../partials/other_head %>
+    <div>
+        <h2>Add a new plant</h2>
+        <form action="/plants" method="POST">
+            <input type="text" name="plant_name" placeholder="Plant Name">
+            <input type="text" name="species" placeholder="Species">
+            <input type="text" name="tree_img_url" placeholder="Plant Url">
+            <input type="text" name="leaf_img_url" placeholder="Plant Leaf Url">
+            <br>
+            <label for="region_id">Native Region</label>
+            <select name="region_id">
+                <% regions.forEach(region => { %>
+                    <option value="<%=region.region_id%>">
+                        <%=region.region_name%>
+                    </option>
+                    <% }) %>
+            </select>
+            <br>
+            <input type="submit">
+        </form>
+        <h2>Cant find your plants region?</h2>
+        <h3>Add a new one!</h3>
+        <form action="/plants" method="POST">
+            <input type="text" name="region_name" placeholder="Region Name">
+            <br>
+            <input type="submit">
+        </form>
+        <h2>All Plants</h2>
         <% plants.forEach(plant => { %>
             <h3>
-                <a href="/plants/<%=plant.plant_id%>"><%=plant.plant_name%></a>
-                    (
-                    <%=plant.species%>)
+                <a href="/plants/<%=plant.plant_id%>">
+                    <%=plant.plant_name%>
+                </a>
+                (
+                <%=plant.species%>)
             </h3>
             <img src="<%=plant.tree_img_url%>" height="300px" width="300px">
             <img src="<%=plant.leaf_img_url%>" height="300px" width="300px">
             <% }) %>
-
-</body>
-
-</html>
+    </div>
+    <% include ../partials/footer %>

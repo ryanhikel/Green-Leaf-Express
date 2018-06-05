@@ -32,21 +32,32 @@ app.get("/", (request, response) => {
 });
 
 app.get("/plants", (request, response) => {
-    Plant.all().then(plants => {
-        response.render("plants/index", { plants: plants });
+    Region.all().then(regions => {
+        Plant.all().then(plants => {
+            response.render("plants/index", { plants: plants, regions: regions });
+        });
     });
 });
 app.post("/plants", (request, response) => {
-    const newPlant = request.body;
-    newPlant.region_id = Number(newPlant.region_id);
-    Plant.create(newPlant)
+    const newItem = request.body;
+    console.log(newItem);
+    
+    if (!newItem.region_id) {
+
+        Region.create(newItem).then(
+            response.redirect(302, "/plants")
+        );
+    }else{
+    newItem.region_id = Number(newItem.region_id);
+    Plant.create(newItem)
         .then(plant => {
-            newPlant.plant_id = plant.plant_id;
-            Plant_region.addRegion(newPlant)
+            newItem.plant_id = plant.plant_id;
+            Plant_region.addRegion(newItem)
                 .then(
                     response.redirect(302, "/plants")
                 );
         });
+    }
 });
 
 app.get("/regions", (request, response) => {
@@ -59,15 +70,22 @@ app.get("/regions", (request, response) => {
 app.get("/region/:name", (request, response) => {
     const name = request.params.name;
     Region.allRegionPlants(name).then(plants => {
+        console.log(plants);
+        if (!plants[0]) {
+            response.send('No plants in this region');
+        }else{
         response.render("regions/plants", { plants: plants });
+        }
     });
 });
+
 app.get("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
     Plant.findById(id).then(plant => {
         response.render("plants/show", { plant: plant[0] });
     });
 });
+
 app.delete("/plants/:id", (request, response) => {
     const id = Number(request.params.id);
     Plant_region.delete(id);

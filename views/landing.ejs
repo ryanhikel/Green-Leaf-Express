@@ -1,47 +1,12 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Green Leaf</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/public/css/style.css">
-</head>
-
-
-<body>
-
-
-        <header>
-            <ul>
-                <li>
-                    <a class="active" href="/">Green Leaf</a>
-                </li>
-                <li>
-                    <a href="/plants">All Plants</a>
-                </li>
-                <li>
-                    <a href="/regions">Regions</a>
-                </li>
-            </ul>
-        </header>
-        
-        
-        <div>
-            <h1>View Plants</h1>
-            <button onclick="window.location.href='/plants'">
-                <img src="/public/images/tree_silhouette.png" height="60px">
-            </button>
-            <h1 class="selection">View Regions</h1>
-            <button onclick="window.location.href='/regions'">
-                <img src="/public/images/globe_icon.png" height="50px">
-            </button>
-        </div>
-        <footer>
-            <h1>Footer</h1>
-        </footer>
-
-</body>
-
-</html>
+<% include ./partials/landing_head %>
+    <div>
+        <h1>View Plants</h1>
+        <button onclick="window.location.href='/plants'">
+            <img src="/public/images/tree_silhouette.png" height="60px">
+        </button>
+        <h1 class="selection">View Regions</h1>
+        <button onclick="window.location.href='/regions'">
+            <img src="/public/images/globe_icon.png" height="50px">
+        </button>
+    </div>
+    <% include ./partials/footer %>
